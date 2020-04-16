@@ -120,3 +120,37 @@ const PhotosUpload = {
     }
 }
 
+const ImageGallery = {
+    highlight: document.querySelector('.gallery .highlight > img'),
+    previews: document.querySelectorAll('.gallery-preview img'), /* pega a lista de todas as imagens */
+    setImage(event) {
+        const { target } = event
+
+
+        /* Remove a class active de todos e adiciona somente a quem clicou */
+        ImageGallery.previews.forEach(preview => preview.classList.remove('active')) 
+        target.classList.add('active')
+
+        /* Troca a imagem em destaque */
+        ImageGallery.highlight.src = target.src
+        Lightbox.image.src = target.src /* Atualiza a imagem do lightbox */
+    }
+}
+
+const Lightbox = {
+    target: document.querySelector('.lightbox-target'),
+    image: document.querySelector('.lightbox-target img'),
+    closeButton: document.querySelector('.lightbox-target a.lightbox-close'),
+    open() {
+        Lightbox.target.style.opacity = 1
+        Lightbox.target.style.top = 0
+        Lightbox.target.style.bottom = 0
+        Lightbox.closeButton.style.top = 0
+    },
+    close() {
+        Lightbox.target.style.opacity = 0
+        Lightbox.target.style.top = "-100%"
+        Lightbox.target.style.bottom = "initial"
+        Lightbox.closeButton.style.top = "-80px"
+    }
+}
